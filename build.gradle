@@ -82,7 +82,7 @@ dependencies {
 
     console "org.grails:grails-console"
 
-    compile name: 'mail'
+    compile(name: 'mail-1.0.5', ext: 'zip')
     compile(name: 'jquery-1.11.1', ext: 'zip')
     compile(name: 'jquery-ui-1.10.4', ext: 'zip')
     compile 'org.grails.plugins:famfamfam:1.0.1'
