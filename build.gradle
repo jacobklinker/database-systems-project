@@ -60,7 +60,12 @@ dependencies {
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
     compile name: 'spring-security-core'
-    compile 'org.grails.plugins:spring-security-ui:1.0-RC2'
+    compile ('org.grails.plugins:spring-security-ui:1.0-RC2') {
+        exclude module: 'mail'
+        exclude module: 'jquery-ui'
+        exclude module: 'jquery'
+        exclude module: 'famfamfam'
+    }
 
     compile "org.grails.plugins:hibernate"
     compile "org.grails.plugins:cache"
