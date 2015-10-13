@@ -77,8 +77,9 @@ dependencies {
 
     console "org.grails:grails-console"
 
-    compile 'org.grails.plugins:mail:1.0.5'
-    compile 'org.grails.plugins:jquery-ui:1.10.3'
+    compile name: 'mail'
+    compile(name: 'jquery-1.11.1', ext: 'zip')
+    compile(name: 'jquery-ui-1.10.4', ext: 'zip')
     compile 'org.grails.plugins:famfamfam:1.0.1'
 }
 
