@@ -76,6 +76,10 @@ dependencies {
     testRuntime 'org.seleniumhq.selenium:selenium-htmlunit-driver:2.44.0'
 
     console "org.grails:grails-console"
+
+    compile 'org.grails.plugins:mail:1.0.5'
+    compile 'org.grails.plugins:jquery-ui:1.10.3'
+    compile 'org.grails.plugins:famfamfam:1.0.1'
 }
 
 task wrapper(type: Wrapper) {
