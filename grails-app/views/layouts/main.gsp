@@ -1,19 +1,34 @@
 <!doctype html>
-<html lang="en" class="no-js">
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title><g:layoutTitle default="Grails"/></title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <asset:stylesheet src="application.css"/>
-        <asset:javascript src="application.js"/>
-
+        <title><g:layoutTitle default="Feed"/></title>
+        <link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.indigo-pink.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <asset:stylesheet src="main.css"/>
         <g:layoutHead/>
+        <style>
+            #view-source {
+              position: fixed;
+              display: block;
+              right: 0;
+              bottom: 0;
+              margin-right: 40px;
+              margin-bottom: 40px;
+              z-index: 900;
+            }
+        </style>
     </head>
-    <body>
-        <div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="grails_logo.png" alt="Grails"/></a></div>
-        <g:layoutBody/>
-        <div class="footer" role="contentinfo"></div>
-        <div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+    <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+        <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+            <g:render template="/templates/toolbar" model="[title: 'Reserve']"/>
+            <g:render template="/templates/navdrawer"/>
+            <main class="mdl-layout__content">
+                <g:layoutBody/>
+            </main>
+        </div>
+        <script src="https://storage.googleapis.com/code.getmdl.io/1.0.2/material.min.js"></script>
     </body>
 </html>
