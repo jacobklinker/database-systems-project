@@ -6,16 +6,14 @@ class BootStrap {
 
     def init = { servletContext ->
     	def adminRole = new Role('ROLE_ADMIN').save()
-    	def managerRole = new Role('MANAGER_ROLE').save()
-    	def userRole = new Role('USER_ROLE').save()
+    	def managerRole = new Role('ROLE_MANAGER').save()
+    	def userRole = new Role('ROLE_USER').save()
 
     	def testUser = new User('me', 'password').save()
+        def manager = new User('manager', 'password').save()
 
-    	UserRole.create testUser, adminRole, true
-
-    	assert User.count() == 1
-    	assert Role.count() == 3
-    	assert UserRole.count() == 1
+    	UserRole.create(testUser, adminRole, true)
+        UserRole.create(manager, managerRole, true)
     }
     def destroy = {
     }
