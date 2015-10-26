@@ -9,7 +9,7 @@ class User implements Serializable {
 	String username
 	String password
 	String firstName
-	Stirng lastName
+	String lastName
 	int reservationLimit
 	Date birthday
 	User manager
@@ -20,10 +20,12 @@ class User implements Serializable {
 	boolean accountLocked
 	boolean passwordExpired
 
-	User(String username, String password) {
+	User(String username, String password, String firstName, String lastName) {
 		this()
 		this.username = username
 		this.password = password
+		this.firstName = firstName
+		this.lastName = lastName
 	}
 
 	@Override
@@ -64,6 +66,13 @@ class User implements Serializable {
 	static constraints = {
 		username blank: false, unique: true
 		password blank: false
+		firstName blank: false
+		lastName blank: false
+		reservationLimit nullable: true
+		birthday nullable: true
+		manager nullable: true
+		gender nullable: true
+		company nullable: true
 	}
 
 	static mapping = {
