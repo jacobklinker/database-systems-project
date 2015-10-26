@@ -8,6 +8,13 @@ class User implements Serializable {
 
 	String username
 	String password
+	String firstName
+	Stirng lastName
+	int reservationLimit
+	Date birthday
+	User manager
+	Gender gender
+	Company company
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
