@@ -14,8 +14,12 @@ class SignUpController {
     	User u = new User(username, password).save()
     	Role r = Role.findByAuthority('ROLE_USER')
 
-    	UserRole.create(u, r, true)
+    	boolean created = UserRole.create(u, r, true)
 
-    	redirect uri:'/'
+    	if (created) {
+    		redirect uri: '/'
+    	} else {
+    		render 'Failed to create this user'
+    	}
     }
 }
