@@ -68,6 +68,7 @@ dependencies {
 
     runtime "org.grails.plugins:asset-pipeline:3.0.6"
     runtime "org.grails.plugins:scaffolding"
+    runtime 'mysql:mysql-connector-java:5.1.29'
 
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
