@@ -59,13 +59,8 @@ dependencies {
     provided "org.springframework.boot:spring-boot-starter-tomcat"
     compile "org.grails:grails-dependencies"
     compile "org.grails:grails-web-boot"
-    compile name: 'spring-security-core'
-    compile ('org.grails.plugins:spring-security-ui:1.0-RC2') {
-        exclude module: 'mail'
-        exclude module: 'jquery-ui'
-        exclude module: 'jquery'
-        exclude module: 'famfamfam'
-    }
+    compile "org.grails.plugins:spring-security-core:2.0-RC4"
+    compile name: 'spring-security-core-grails'
 
     compile "org.grails.plugins:hibernate"
     compile "org.grails.plugins:cache"
@@ -85,7 +80,8 @@ dependencies {
     compile(name: 'mail-1.0.5', ext: 'zip')
     compile(name: 'jquery-1.11.1', ext: 'zip')
     compile(name: 'jquery-ui-1.10.4', ext: 'zip')
-    compile 'org.grails.plugins:famfamfam:1.0.1'
+    compile(name: 'famfamfam-1.0.1', ext: 'zip')
+    compile(name: 'spring-security-ui-1.0-RC2', ext: 'zip')
 }
 
 task wrapper(type: Wrapper) {
