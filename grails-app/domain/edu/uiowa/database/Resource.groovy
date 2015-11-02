@@ -4,7 +4,7 @@ class Resource {
 
 	String description
 	String condition
-	Resource parent
+	int resource_parent_id
 	ResourceType type
 
     static constraints = {
