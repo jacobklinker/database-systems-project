@@ -1,0 +1,9 @@
+div.inner_center {
+	display: table;
+	margin: 0 auto;
+}
+
+div.data_table {
+	margin-top: 16px;
+	margin-bottom: 8px;
+}

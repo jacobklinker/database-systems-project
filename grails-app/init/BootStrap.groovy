@@ -15,11 +15,11 @@ class BootStrap {
     	def managerRole = new Role('ROLE_MANAGER').save()
     	def userRole = new Role('ROLE_USER').save()
 
-    	def testUser = new User('admin', 'password', 'Jake', 'Klinker').save()
-        def manager = new User('manager', 'password', 'Jake', 'Klinker').save()
-        def user = new User('user', 'password', 'Jake', 'Klinker').save()
+    	def admin = new User('admin', 'password', 'Jake', 'Klinker').save()
+        def manager = new User('manager', 'password', 'Bo', 'Zhou').save()
+        def user = new User('user', 'password', 'Lufan', 'Li').save()
 
-    	UserRole.create(testUser, adminRole, true)
+    	UserRole.create(admin, adminRole, true)
         UserRole.create(manager, managerRole, true)
         UserRole.create(user, userRole, true)
 
@@ -29,6 +29,23 @@ class BootStrap {
         def wellsFargo = new Company(name: 'Wells Fargo').save()
         def google = new Company(name: 'Google').save()
         def apple = new Company(name: 'Apple').save()
+
+        admin.birthday = Date.parse('yyMMddHHmmss', '931229023354')
+        admin.gender = male
+        admin.company = google
+        admin.save()
+
+        manager.birthday = Date.parse('yyMMddHHmmss', '931229023354')
+        manager.manager = admin
+        manager.gender = male
+        manager.company = apple
+        manager.save()
+
+        user.birthday = Date.parse('yyMMddHHmmss', '931229023354')
+        user.manager = manager
+        user.gender = male
+        user.company = google
+        user.save()
 
         def building = new ResourceType(description: 'Building').save()
         def room = new ResourceType(description: 'Room').save()
@@ -68,9 +85,11 @@ class BootStrap {
         						parent: building2,
         						type: room).save()
         def room6 = new Resource(description: 'Room 220',
+                                quality: 'New',
         						parent: building2,
         						type: room).save()
         def room7 = new Resource(description: 'Room 322',
+                                quality: 'New',
         						parent: building3,
         						type: room).save()
         def room8 = new Resource(description: 'Room 338',
@@ -202,19 +221,19 @@ class BootStrap {
         						parent: computerRack1,
         						type: computer).save()
 
-		new Reservation(date: new Date().parse('MM/dd/yyyy HH:MM:ss', '11/04/2015 12:30:00'),
+		new Reservation(time: Date.parse('yyMMddHHmmss', '151104123000'),
 						user: user,
 						resource: room1).save()
-		new Reservation(date: new Date().parse('MM/dd/yyyy HH:MM:ss', '11/04/2015 12:30:00'),
+		new Reservation(time: Date.parse('yyMMddHHmmss', '151104123000'),
 						user: manager,
 						resource: room2).save()
-		new Reservation(date: new Date().parse('MM/dd/yyyy HH:MM:ss', '11/04/2015 13:00:00'),
+		new Reservation(time: Date.parse('yyMMddHHmmss', '151104130000'),
 						user: user,
 						resource: room3).save()
-		new Reservation(date: new Date().parse('MM/dd/yyyy HH:MM:ss', '11/04/2015 13:30:00'),
+		new Reservation(time: Date.parse('yyMMddHHmmss', '151104133000'),
 						user: user,
 						resource: room3).save()
-		new Reservation(date: new Date().parse('MM/dd/yyyy HH:MM:ss', '11/04/2015 13:30:00'),
+		new Reservation(time: Date.parse('yyMMddHHmmss', '151104133000'),
 						user: manager,
 						resource: room7).save()
     }
