@@ -3,7 +3,7 @@ package edu.uiowa.database
 class Resource {
 
 	String description
-	String condition
+	String quality
 	Resource parent
 	ResourceType type
 
