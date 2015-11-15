@@ -1,3 +1,4 @@
+
 <div class="mdl-layout__drawer">
     <span class="mdl-layout-title">Reserve</span>
     <nav class="mdl-navigation">
@@ -11,6 +12,8 @@
         </sec:ifAnyGranted>
         <sec:ifLoggedIn>
         <a class="mdl-navigation__link" href="${createLink(controller:'user',action:'passwordPage')}">Change Password</a>
+        <a class="mdl-navigation__link" href="${createLink(controller: 'reservation', action: 'createReservation')}">Reserve a Resource</a>
+        <a class="mdl-navigation__link" href="${createLink(controller: 'reservation')}">View My Reservations</a>
         </sec:ifLoggedIn>
     </nav>
 </div>

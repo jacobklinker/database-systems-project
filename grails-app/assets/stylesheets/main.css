@@ -5,6 +5,17 @@ body {
     padding: 0;
 }
 
+.error {
+    color: red;
+    margin-top: 16px;
+    margin-left: 16px;
+}
+
+.message {
+    margin-top: 16px;
+    margin-left: 16px;
+}
+
 .mdl-demo .mdl-layout.is-small-screen .mdl-layout__header-row h3 {
     font-size: inherit;
 }
