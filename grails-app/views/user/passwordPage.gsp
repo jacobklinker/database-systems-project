@@ -7,7 +7,8 @@
 
 
     <body>
-        <g:form controller="user" params="[username:username]">
+        <g:form controller="user">
+            <p>Change your password!</p>
             <g:if test="${flash.message}"> 
                     <div class="message">${flash.message}</div> 
             </g:if> 
@@ -25,7 +26,7 @@
             </div>
             <p> Old Password: ${old}</p>
             <p> input: ${inputold}</p>
-            <g:actionSubmit  value="Change" action="changePassword" />
+            <g:actionSubmit  value="Change Password" action="changePassword" />
             <g:actionSubmit  value="Cancel" action="cancel" />
         </g:form>
     </body>

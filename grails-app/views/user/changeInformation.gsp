@@ -1,4 +1,6 @@
 <!doctype html>
+<%@ page import="edu.uiowa.database.Gender" %>
+<%@ page import="edu.uiowa.database.Company" %>
 <html>
     <head>
         <meta name="layout" content="main"/>
@@ -7,29 +9,22 @@
 
 
     <body>
-        <g:form controller='user' action='change'>
+        <g:form controller='user' action='change' params="[username:username]">
             <div>
                 <label for='birthday'>Birthday:</label>
                 <g:datePicker name="birthday" value="${new Date()}" precision="day" />
             </div>
-            
-            <div>
-                <label for='gender'>Male</label>
-                <g:radio name='gender' value='male'/>
-                <label for='gender'>Female</label>
-                <g:radio name='gender' value='female' checked='true'/>
-            </div>
-            
+                  
             <div>
                 <label for='company'>Company:</label>
-                <g:textField name='company'/ value='${company}'/>
+                <g:select name='company' from="${Company.findAll()}" value="${company}" optionKey="id" optionValue="name" />
             </div>
             
             <br>First Name: ${firstname}</br>
             <br>Last Name: ${lastname}</br>
             
             <g:actionSubmit  value="Save" action="save" />
-            <g:actionSubmit  value="Cancel" action="cancel" />
+            <g:actionSubmit  controller='index' value="Back" action="back" />
         </g:form>
     </body>
 

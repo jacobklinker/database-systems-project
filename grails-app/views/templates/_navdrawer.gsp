@@ -9,5 +9,8 @@
         <a class="mdl-navigation__link" href="${createLink(controller:'scanAll',action:'index')}">View all users</a>
         <a class="mdl-navigation__link" href="${createLink(controller:'scanAll',action:'createdBy')}">View All Users Created By you</a>
         </sec:ifAnyGranted>
+        <sec:ifLoggedIn>
+        <a class="mdl-navigation__link" href="${createLink(controller:'user',action:'passwordPage')}">Change Password</a>
+        </sec:ifLoggedIn>
     </nav>
 </div>

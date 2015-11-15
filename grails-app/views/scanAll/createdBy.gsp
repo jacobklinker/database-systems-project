@@ -8,7 +8,7 @@
 
     <body>
         <g:each in="${user}">
-            <p>Username: ${it.username}</p>
+            <g:link controller='user' action="information" params="[username:it.username]" ><p>Username: ${it.username}</p></g:link>
         </g:each>
 
         

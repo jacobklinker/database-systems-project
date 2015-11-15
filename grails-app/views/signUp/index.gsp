@@ -1,5 +1,6 @@
 <!doctype html>
 <%@ page import="edu.uiowa.database.Gender" %>
+<%@ page import="edu.uiowa.database.Company" %>
 <html>
     <head>
         <meta name="layout" content="main"/>
@@ -7,7 +8,9 @@
     </head>
     <body>
         <g:form controller='signUp' action='createAccount'>
-            
+                <g:if test="${flash.message}"> 
+                        <div class="message" size="40">${flash.message}</div> 
+                </g:if> 
                 <div>
         		<label for='firstname'>First Name:</label>
         		<g:textField name='firstname'></g:textField>
@@ -23,9 +26,7 @@
         		<g:textField name='username'></g:textField>
         	</div>
                 
-                <g:if test="${flash.message}"> 
-                        <div class="message">${flash.message}</div> 
-                </g:if> 
+
         	<div>
         		<label for='password'>Password:</label>
         		<g:textField name='password'></g:textField>
@@ -45,12 +46,12 @@
             
                 <div>
                         <label for='gender'>Gender:</label>
-                        <g:select name='gender' from="${Gender.findAll()}" value="${gender}" noSelection="['':'-Choose your gender-']" optionKey="id" optionValue="name" />
+                        <g:select name='gender' from="${Gender.findAll()}" value="${gender}" required='' noSelection="['':'-Choose your gender-']" optionKey="id" optionValue="name" />
                 </div>
             
                 <div>
                         <label for='company'>Company:</label>
-                        <g:textField name='company'/ value='${company}'/>
+                        <g:select name='company' from="${Company.findAll()}" value="${company}" required='' noSelection="['':'-Choose your company-']" optionKey="id" optionValue="name" />
                 </div>
                 password: ${password}
                 confirm: ${confirm}

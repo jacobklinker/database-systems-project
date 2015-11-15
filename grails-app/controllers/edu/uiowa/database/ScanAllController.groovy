@@ -12,12 +12,11 @@ class ScanAllController {
 
     def createdBy = {
             def manager = springSecurityService.currentUser
-            def usersCreatedByManager = User.findByManager(manager)
+            def usersCreatedByManager = User.findAllByManager(manager)
             if(usersCreatedByManager == null) {
                 render 'no user'
             }
-            render(view:'createdBy', model:[user:usersCreatedByManager.list()])
-            redirect (controller:'scanAll',action:'createdBy',params:[user:user])
+            render(view:'createdBy', model:[user:usersCreatedByManager])
     }
     def cancel = {
             redirect uri: '/'

@@ -13,4 +13,9 @@ class IndexController {
     			currentUser: springSecurityService.currentUser
     		])
     }
+    
+    def back() {
+        def targetUri = params.targetUri ?: "/"
+        redirect(uri: targetUri)
+    }
 }
