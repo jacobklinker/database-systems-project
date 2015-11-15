@@ -3,8 +3,8 @@
         <span class="mdl-layout-title">Reserve</span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="${createLink(uri: '/')}">Home</a>
-            <a class="mdl-navigation__link" href="${createLink(controller:'secure')}">Reserve a Resource</a>
-            <a class="mdl-navigation__link" href="${createLink(controller:'secure')}">View My Reservations</a>
+            <a class="mdl-navigation__link" href="${createLink(controller: 'secure')}">Reserve a Resource</a>
+            <a class="mdl-navigation__link" href="${createLink(controller: 'reservation')}">View My Reservations</a>
             <sec:ifAnyGranted roles="ROLE_ADMIN">
                 <a class="mdl-navigation__link" href="${createLink(controller: 'user')}">View Users</a>
             </sec:ifAnyGranted>
