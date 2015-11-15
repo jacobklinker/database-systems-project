@@ -22,9 +22,16 @@
         </style>
     </head>
     <body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base">
+        <asset:javascript src="jquery-2.1.3.js"/>
         <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
             <g:render template="/templates/toolbar" model="[title: 'Reserve']"/>
             <g:render template="/templates/navdrawer"/>
+            <g:if test="${flash.error}">
+              <div class="alert alert-error" style="display: block">${flash.error}</div>
+            </g:if>
+            <g:if test="${flash.message}">
+              <div class="message" style="display: block">${flash.message}</div>
+            </g:if>
             <main class="mdl-layout__content">
                 <g:layoutBody/>
             </main>

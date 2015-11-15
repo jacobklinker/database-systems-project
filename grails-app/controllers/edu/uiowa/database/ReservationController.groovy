@@ -5,7 +5,9 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured('permitAll')
 class ReservationController {
 
+	def springSecurityService
+
     def index() {
-    	render(view: "index", model: [reservationList: Reservation.find(reservation.user.username = this.username)])
+    	render(view: "index", model: [reservationList: Reservation.findAllByUser(springSecurityService.currentUser)])
     }
 }
