@@ -238,6 +238,21 @@ class BootStrap {
         new Reservation(time: Date.parse('yyMMddHHmmss', '151104133000'),
                         user: manager,
                         resource: room7).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '151115123000'),
+                        user: admin,
+                        resource: room1).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '151115123000'),
+                        user: admin,
+                        resource: room2).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '151115130000'),
+                        user: admin,
+                        resource: room3).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '151115133000'),
+                        user: admin,
+                        resource: room3).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '151115133000'),
+                        user: admin,
+                        resource: room7).save()
         }
     }
     

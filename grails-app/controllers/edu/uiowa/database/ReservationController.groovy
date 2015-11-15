@@ -8,7 +8,7 @@ class ReservationController {
 	def springSecurityService
 
     def index() {
-    	render(view: "index", model: [reservationList: Reservation.findAllByUser(springSecurityService.currentUser)])
+    	render(view: "index", model: [reservations: Reservation.findAllByUser(springSecurityService.currentUser)])
     }
 
     def createReservation() {

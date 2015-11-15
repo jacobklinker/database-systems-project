@@ -12,64 +12,7 @@
 		        <!-- Table for reservations -->
 		        <div class="data_table">
 		        	Reservations
-					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
-				        <thead>
-				        	<th>ID</th>
-				        	<th class="mdl-data-table__cell--non-numeric">Time</th>
-				        	<th class="mdl-data-table__cell--non-numeric">User First Name</th>
-				        	<th class="mdl-data-table__cell--non-numeric">User Last Name</th>
-				        	<th class="mdl-data-table__cell--non-numeric">User Company</th>
-				        	<th class="mdl-data-table__cell--non-numeric">Resource Description</th>
-				        	<th class="mdl-data-table__cell--non-numeric">Resource Type</th>
-				        	<th class="mdl-data-table__cell--non-numeric">Resource Parent</th>
-				        	<th class="mdl-data-table__cell--non-numeric">Resource Quality</th>
-				        </thead>
-				        <tbody>
-				        	<g:each in="${reservations}" var="reservation">
-				        		<tr>
-				        			<td>${reservation.id}</td>
-				        			<td class="mdl-data-table__cell--non-numeric">${reservation.time}</td>
-				        			<g:if test="${reservation.user != null}">
-				        				<td class="mdl-data-table__cell--non-numeric">${reservation.user.firstName}</td>
-				        				<td class="mdl-data-table__cell--non-numeric">${reservation.user.lastName}</td>
-				        				<g:if test="${reservation.user.company != null}">
-					        				<td class="mdl-data-table__cell--non-numeric">${reservation.user.company.name}</td>
-					        			</g:if>
-					        			<g:else>
-					        				<td class="mdl-data-table__cell--non-numeric"></td>
-					        			</g:else>
-				        			</g:if>
-				        			<g:else>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        			</g:else>
-				        			<g:if test="${reservation.resource != null}">
-				        				<td class="mdl-data-table__cell--non-numeric">${reservation.resource.description}</td>
-				        				<g:if test="${reservation.resource.type != null}">
-					        				<td class="mdl-data-table__cell--non-numeric">${reservation.resource.type.description}</td>
-					        			</g:if>
-					        			<g:else>
-					        				<td class="mdl-data-table__cell--non-numeric"></td>
-					        			</g:else>
-				        				<g:if test="${reservation.resource.parent != null}">
-					        				<td class="mdl-data-table__cell--non-numeric">${reservation.resource.parent.description}</td>
-					        			</g:if>
-					        			<g:else>
-					        				<td class="mdl-data-table__cell--non-numeric"></td>
-					        			</g:else>
-					        			<td class="mdl-data-table__cell--non-numeric">${reservation.resource.quality}</td>
-				        			</g:if>
-				        			<g:else>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        				<td class="mdl-data-table__cell--non-numeric"></td>
-				        			</g:else>
-				        		</tr>
-				        	</g:each> 
-				        </tbody>
-			        </table>
+					<g:render template="/templates/reservation_table" model="[displayUser: true]"/>
 			    </div>
 		    </div>
 		</div>
