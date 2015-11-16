@@ -7,7 +7,14 @@
     </head>
     <body>
     	<div class="instructions">
-    		Reserve by time functionality coming soon.
+    		<g:form action="submitTime">
+                <label for="date">Date:</label><br/>
+                <g:datePicker name="date" value="${new Date()}" precision="day" /><br/><br/>
+                <label for="room">Time:</label><br/>
+                <g:select name="time"
+                          from="${timeslots}"/><br/><br/>
+                <input type="submit" value="Submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"/>
+            </g:form>
        	</div>
     </body>
 </html>

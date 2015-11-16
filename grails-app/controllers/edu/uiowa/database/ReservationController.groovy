@@ -56,7 +56,28 @@ class ReservationController {
     }
 
     def reserveByTime() {
+        def timeslots = TimeSlot.getTimeslots()
+        [timeslots: timeslots]
+    }
 
+    def submitTime() {
+        def date = params.date
+        def timeParts = params.time.split(':')
+        date.setHours(Integer.parseInt(timeParts[0]))
+        date.setMinutes(Integer.parseInt(timeParts[1]))
+        
+        def reservations = Reservation.findAllByTime(date)
+        def rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+
+        reservations.each {
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).id == it.resource.id) {
+                    rooms.remove(i--);
+                }
+            }
+        }
+
+        [rooms: rooms, date: date]
     }
 
     def changeReservation() {
