@@ -4,7 +4,7 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Sign Up</title>
+        <title>Change User Information</title>
     </head>
     <body>
         <g:form controller='user' action='change' params="[username:username]">

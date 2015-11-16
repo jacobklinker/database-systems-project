@@ -2,9 +2,10 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Users</title>
+        <title>My Reservations</title>
         <asset:stylesheet src="index.css"/>
         <asset:stylesheet src="view_all.css"/>
+        <asset:stylesheet src="table.css"/>
     </head>
     <body>
     	<g:if test="${reservations == null || reservations.size() == 0}">
@@ -19,6 +20,6 @@
 			    </div>
 			</div>
 	    </g:else>
-        <asset:stylesheet src="table.js"/>
+        <asset:javascript src="table.js"/>
     </body>
 </html>

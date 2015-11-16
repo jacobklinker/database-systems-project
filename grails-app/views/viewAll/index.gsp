@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Reserve</title>
+        <title>View All Data</title>
         <asset:stylesheet src="view_all.css"/>
     </head>
     <body>

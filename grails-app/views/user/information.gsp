@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Sign Up</title>
+        <title>User Information</title>
     </head>
     <body>
         <g:form controller="user" params="[username:username]">

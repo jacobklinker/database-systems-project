@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Sign Up</title>
+        <title>My Users</title>
         <asset:stylesheet src="index.css"/>
         <asset:stylesheet src="view_all.css"/>
         <asset:stylesheet src="table.css"/>

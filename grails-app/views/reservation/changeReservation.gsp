@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta name="layout" content="main"/>
-        <title>Reserve by Room</title>
+        <title>Change Reservation</title>
         <asset:stylesheet src="index.css"/>
     </head>
     <body>
