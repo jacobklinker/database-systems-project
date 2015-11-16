@@ -15,6 +15,7 @@
 	        <div class="mdl-grid">
 				<div class="inner_center">
 			        <div class="data_table">
+                        Click on any reservation to modify it:
 			        	<g:render template="/templates/reservation_table" model="[displayUser: false]"/>
 			        </div>
 			    </div>
