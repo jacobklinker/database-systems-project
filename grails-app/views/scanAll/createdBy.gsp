@@ -4,17 +4,23 @@
         <meta name="layout" content="main"/>
         <title>Sign Up</title>
         <asset:stylesheet src="index.css"/>
+        <asset:stylesheet src="view_all.css"/>
     </head>
     <body>
-    	<g:if test="${user == null}">
+    	<g:if test="${users == null}">
     		<div class="instructions">
     			No users created by me!
     		</div>
     	</g:if>
     	<g:else>
-	        <g:each in="${user}">
-	            <g:link controller='user' action="information" params="[username:it.username]" ><p>Username: ${it.username}</p></g:link>
-	        </g:each>
+            <div class="mdl-grid">
+                <div class="inner_center">
+                    <div class="data_table">
+	                   <g:render template="/templates/users"/>
+                    </div>
+                </div>
+            </div>
 	    </g:else>
+        <asset:javascript src="user.js"/>
     </body>
 </html>

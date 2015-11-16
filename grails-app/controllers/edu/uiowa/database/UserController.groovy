@@ -40,10 +40,16 @@ class UserController {
 
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def information() {
-            def user = User.findByUsername(params.username)
-            render(view:'information', model: [username: user.username, password: user.password, 
-                firstname: user.firstName, lastname: user.lastName, birthday: user.birthday,
-                gender: user.gender, company: user.company, manager: user.manager])
+        def user
+        if (params.username != null) {
+            user = User.findByUsername(params.username)
+        } else {
+            user = User.findById(Integer.parseInt(params.id))
+        }
+
+        render(view:'information', model: [username: user.username, password: user.password, 
+            firstname: user.firstName, lastname: user.lastName, birthday: user.birthday,
+            gender: user.gender, company: user.company, manager: user.manager])
     }
     
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
@@ -89,7 +95,7 @@ class UserController {
     }
 
     def back() {
-        redirect(uri: request.getHeader('referer') )
+        redirect(uri: request.getHeader('referer'))
     }
 
     def cancel() {
