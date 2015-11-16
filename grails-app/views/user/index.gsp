@@ -4,6 +4,7 @@
         <meta name="layout" content="main"/>
         <title>Change User Roles</title>
         <asset:stylesheet src="view_all.css"/>
+        <asset:stylesheet src="table.css"/>
     </head>
     <body>
         <div class="mdl-grid">

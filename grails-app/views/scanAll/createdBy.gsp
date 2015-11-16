@@ -5,6 +5,7 @@
         <title>Sign Up</title>
         <asset:stylesheet src="index.css"/>
         <asset:stylesheet src="view_all.css"/>
+        <asset:stylesheet src="table.css"/>
     </head>
     <body>
     	<g:if test="${users == null}">
