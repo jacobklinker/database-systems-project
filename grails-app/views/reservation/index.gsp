@@ -19,6 +19,17 @@
 			        </div>
 			    </div>
 			</div>
+
+            <g:if test="${subordinatesReservations != null && subordinatesReservations.size() > 0}">
+                <div class="mdl-grid">
+                    <div class="inner_center">
+                        <div class="data_table">
+                            <br/><br/>Reservations from users I've created:
+                            <g:render template="/templates/reservation_table" model="[displayUser: true, reservations: subordinatesReservations]"/>
+                        </div>
+                    </div>
+                </div>
+            </g:if>
 	    </g:else>
         <asset:javascript src="table.js"/>
     </body>

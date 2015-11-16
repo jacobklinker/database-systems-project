@@ -8,7 +8,20 @@ class ReservationController {
 	def springSecurityService
 
     def index() {
-    	render(view: "index", model: [reservations: Reservation.findAllByUser(springSecurityService.currentUser)])
+        def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
+        def mySubordinatesReservations = []
+        def myUsers = User.findAllByManager(springSecurityService.currentUser)
+
+        if (myUsers != null && myUsers.size() > 0) {
+            myUsers.each { user ->
+                def reservations = Reservation.findAllByUser(user)
+                reservations.each {
+                    mySubordinatesReservations << it
+                }
+            }
+        }
+
+    	render(view: "index", model: [reservations: myReservations, subordinatesReservations: mySubordinatesReservations])
     }
 
     def createReservation() {
