@@ -22,6 +22,6 @@
                 </div>
             </div>
 	    </g:else>
-        <asset:javascript src="user.js"/>
+        <asset:javascript src="table.js"/>
     </body>
 </html>

@@ -34,6 +34,6 @@
 		        </div>
 		    </div>
 		</div>
-		<asset:javascript src="user.js"/>
+		<asset:javascript src="table.js"/>
     </body>
 </html>

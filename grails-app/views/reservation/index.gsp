@@ -19,5 +19,6 @@
 			    </div>
 			</div>
 	    </g:else>
+        <asset:stylesheet src="table.js"/>
     </body>
 </html>

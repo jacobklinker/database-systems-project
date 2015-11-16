@@ -2,7 +2,7 @@ package edu.uiowa.database
 
 import grails.plugin.springsecurity.annotation.Secured
 
-@Secured('permitAll')
+@Secured(['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'])
 class ReservationController {
 
 	def springSecurityService
@@ -14,4 +14,17 @@ class ReservationController {
     def createReservation() {
     	render(view: "createReservation")
     }
+
+    def reserveByRoom() {
+
+    }
+
+    def reserveByTime() {
+
+    }
+
+    def changeReservation() {
+
+    }
+    
 }

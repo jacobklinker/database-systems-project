@@ -22,7 +22,7 @@
     </thead>
     <tbody>
     	<g:each in="${reservations}" var="reservation">
-    		<tr>
+    		<tr class='clickable-row' data-href='${createLink(controller: 'reservation', action: 'changeReservation', id: reservation.id)}'>
                 <g:if test="${displayUser}">
                     <td>${reservation.id}</td>
                 </g:if>

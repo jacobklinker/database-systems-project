@@ -8,4 +8,8 @@ class Reservation {
 
     static constraints = {
     }
+
+    static mapping = {
+	    sort "time"
+	}
 }
