@@ -54,6 +54,7 @@ class BootStrap {
         def room = new ResourceType(description: 'Room').save()
         def computerRack = new ResourceType(description: 'Computer Rack').save()
         def computer = new ResourceType(description: 'Computer').save()
+        def projector = new ResourceType(description: 'Projector').save()
 
         def building1 = new Resource(description: 'Campus Building 1', 
                                 quality: 'Built in 1987', 
@@ -223,6 +224,14 @@ class BootStrap {
                                 quality: 'Used',
                                 parent: computerRack1,
                                 type: computer).save()
+        def projector1 = new Resource(description: 'Projector 1',
+                                quality: 'Light burned out', 
+                                parent: room1,
+                                type: projector).save()
+        def projector2 = new Resource(description: 'Projector 2',
+                                quality: 'New',
+                                parent: room2,
+                                type: projector).save()
 
         new Reservation(time: Date.parse('yyMMddHHmmss', '151104123000'),
                         user: user,

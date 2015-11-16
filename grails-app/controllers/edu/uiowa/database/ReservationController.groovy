@@ -80,6 +80,15 @@ class ReservationController {
         [rooms: rooms, date: date]
     }
 
+    def reserveByResource() {
+        def resourceTypes = []
+        resourceTypes << ResourceType.findByDescription("Computer")
+        resourceTypes << ResourceType.findByDescription("Projector")
+        resourceTypes << ResourceType.findByDescription("Computer Rack")
+
+        [types: resourceTypes]
+    }
+
     def changeReservation() {
         def reservation = Reservation.findById(params.id)
         reservation.delete()
