@@ -1,3 +1,7 @@
 tr.clickable-row {
-	cursor: pointer
+	cursor: pointer;
+}
+
+td.clickable-cell {
+	cursor: pointer;
 }

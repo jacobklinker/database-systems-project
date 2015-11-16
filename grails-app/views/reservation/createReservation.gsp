@@ -8,12 +8,12 @@
     </head>
     <body>
     	<div class="instructions">
-    		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+    		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="${createLink(action: 'reserveByRoom')}">
                 Reserve By Room
-            </button>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+            </a>
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="${createLink(action: 'reserveByTime')}">
                 Reserve By Time
-            </button>
+            </a>
        	</div>
     </body>
 </html>
