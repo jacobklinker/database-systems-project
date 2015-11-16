@@ -11,7 +11,6 @@
                 <label for="room">Choose a room:</label><br/>
                 <g:select name="room"
                           from="${rooms}"
-                          value="${room}"
                           optionId="id"
                           optionValue="description"/><br/><br/>
                 <label for="date">Date:</label><br/>

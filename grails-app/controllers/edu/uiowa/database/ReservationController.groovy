@@ -60,7 +60,9 @@ class ReservationController {
     }
 
     def changeReservation() {
-
+        def reservation = Reservation.findById(params.id)
+        reservation.delete()
+        redirect action: 'reserveByRoom'
     }
     
 }
