@@ -4,13 +4,8 @@
         <meta name="layout" content="main"/>
         <title>Sign Up</title>
     </head>
-
-
     <body>
         <g:form controller="user" params="[username:username]">
-            <g:if test="${flash.message}"> 
-                    <div class="message">${flash.message}</div> 
-            </g:if> 
             <br>User: ${username}</br>
             <br>Password: ${password}</br>
             <br>First Name: ${firstname}</br>
@@ -23,8 +18,4 @@
             <g:actionSubmit  value="Back" action="back" params="[targetUri: (request.forwardURI - request.contextPath)]"/>
         </g:form>
     </body>
-
-
-
-
 </html>

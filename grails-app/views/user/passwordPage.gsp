@@ -4,14 +4,9 @@
         <meta name="layout" content="main"/>
         <title>Sign Up</title>
     </head>
-
-
     <body>
         <g:form controller="user">
             <p>Change your password!</p>
-            <g:if test="${flash.message}"> 
-                    <div class="message">${flash.message}</div> 
-            </g:if> 
             <div>
                 <label for='oldPassword'>Old password:</label>
                 <g:textField name='oldPassword'/>

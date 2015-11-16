@@ -4,15 +4,18 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
 class SignUpController {
+
     def springSecurityService
 
     def index() {
         String password = params.password
         String confirm = params.confirm
         render( view:'index', model: [ password:password, confirm:confirm] )
-        }
+    }
     
-    def information() { }
+    def information() {
+
+    }
     
     def createAccount() { 
         String firstname = params.firstname
@@ -24,12 +27,12 @@ class SignUpController {
         Gender gender = Gender.findById(params.gender)
         Date birthday = params.birthday
         Company company = Company.findById(params.company)
-        if(User.findByUsername(username) != null) {
+
+        if (User.findByUsername(username) != null) {
                 flash.message = "username already used!"
                 redirect (controller:'signUp')
-        } 
-        else {
-            if(password == confirm) {
+        } else {
+            if (password == confirm) {
                 User u = new User(username, password,firstname,lastname).save()
                 Role r = Role.findByAuthority('ROLE_USER')
                 boolean created = UserRole.create(u, r, true)
@@ -41,16 +44,13 @@ class SignUpController {
                         u.birthday = birthday
                         u.company = company
                         redirect (controller:'user',action:'information',params:[username:username])
-                } 
-                else {
+                } else {
                         render 'Failed to create this user'
                 }
-            } 
-            else {
+            } else {
                 flash.message ='password does not fit'
                 redirect (controller:'signUp')
             }
         }
-  
     }
 }

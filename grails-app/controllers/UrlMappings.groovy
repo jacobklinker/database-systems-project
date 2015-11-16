@@ -7,7 +7,6 @@ class UrlMappings {
             }
         }
 
-        "/favicon.ico"(controller:"index")
         "/"(controller:"index")
         "500"(view:'/error')
         "404"(view:'/notFound')

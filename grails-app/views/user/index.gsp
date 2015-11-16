@@ -5,10 +5,7 @@
         <title>Change User Roles</title>
         <asset:stylesheet src="view_all.css"/>
     </head>
-
-
     <body>
-     
         <div class="mdl-grid">
 			<div class="inner_center">
 		        <div class="data_table">

@@ -4,21 +4,21 @@ import grails.plugin.springsecurity.annotation.Secured
 
 @Secured(["ROLE_ADMIN", "ROLE_MANAGER"])
 class ScanAllController {
+
     def springSecurityService
-    def index = {
-        render(view:'index', model:[user:User.list()])
-        
+
+    def index() {
+        render(view:'index', model: [user: User.list()])
     }
 
-    def createdBy = {
+    def createdBy() {
             def manager = springSecurityService.currentUser
             def usersCreatedByManager = User.findAllByManager(manager)
-            if(usersCreatedByManager == null) {
-                render 'no user'
-            }
-            render(view:'createdBy', model:[user:usersCreatedByManager])
+
+            render(view:'createdBy', model: [user: usersCreatedByManager])
     }
-    def cancel = {
-            redirect uri: '/'
+
+    def cancel() {
+            redirect controller: "index"
     }
 }

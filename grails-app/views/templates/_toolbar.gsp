@@ -4,7 +4,7 @@
         <div class="mdl-layout-spacer"></div>
         <nav class="mdl-navigation">
         	<sec:ifLoggedIn>
-        		Hello, <g:link controller='user' action="information" params="[username:"${sec.loggedInUserInfo(field:'username')}"]" > <sec:loggedInUserInfo field="username"/></g:link>
+        		Hello,&nbsp;<g:link style="color: white; text-decoration: none;" controller='user' action="information" params="[username:"${sec.loggedInUserInfo(field:'username')}"]"><sec:loggedInUserInfo field="username"/></g:link>
 				<g:link class="mdl-navigation__link mdl-typography--text-uppercase" controller='logout' method="post">Logout</g:link>
         	</sec:ifLoggedIn>
         	<sec:ifNotLoggedIn>
