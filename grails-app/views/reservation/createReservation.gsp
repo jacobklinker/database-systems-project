@@ -15,7 +15,7 @@
                 Reserve By Time
             </a>
             <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" href="${createLink(action: 'reserveByResource')}">
-                Reserve By Resource
+                Reserve By Resource Type
             </a>
        	</div>
     </body>

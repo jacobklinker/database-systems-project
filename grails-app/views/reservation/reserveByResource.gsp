@@ -8,8 +8,8 @@
     <body>
         <div class="instructions">
         	<g:form action="reserveByRoom">
-                <label for="resource_types">Choose a resource type:</label><br/>
-                <g:select name="resource_types"
+                <label for="resourceType">Choose a resource type:</label><br/>
+                <g:select name="resourceType"
                           from="${types}"
                           optionId="id"
                           optionValue="description"/><br/><br/>

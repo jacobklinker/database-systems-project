@@ -16,7 +16,29 @@ class ReservationController {
     }
 
     def reserveByRoom() {
-        def rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+        def rooms = []
+        
+        if (params.resourceType == null) {
+            rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+        } else {
+            def t = params.resourceType.split(' ')
+            def type = ResourceType.findById(t[t.length - 1])
+            def resources = Resource.findAllByType(type)
+
+            resources.each { resource ->
+                boolean contains = false
+                rooms.each { room ->
+                    if (resource.parent.id == room.id) {
+                        contains = true
+                    }
+                }
+
+                if (!contains) {
+                    rooms << resource.parent
+                }
+            }
+        }
+        
         [rooms: rooms]
     }
 
