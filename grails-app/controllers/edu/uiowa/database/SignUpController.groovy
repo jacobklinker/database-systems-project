@@ -37,19 +37,18 @@ class SignUpController {
                 Role r = Role.findByAuthority('ROLE_USER')
                 boolean created = UserRole.create(u, r, true)
                 u.manager = createdBy
-                if (user)
                 if (created) {
-                        flash.message = "user created!"
+                        flash.message = "User created!"
                         u.gender = gender
                         u.birthday = birthday
                         u.company = company
-                        redirect (controller:'user',action:'information',params:[username:username])
+                        redirect (controller: 'user', action: 'information', params: [username: username])
                 } else {
                         render 'Failed to create this user'
                 }
             } else {
-                flash.message ='password does not fit'
-                redirect (controller:'signUp')
+                flash.message ='Password does not fit'
+                redirect (controller: 'signUp')
             }
         }
     }
