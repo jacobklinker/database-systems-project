@@ -10,6 +10,7 @@ class User implements Serializable {
 	String password
 	String firstName
 	String lastName
+	String email
 	int reservationLimit
 	Date birthday
 	User manager
@@ -26,6 +27,11 @@ class User implements Serializable {
 		this.password = password
 		this.firstName = firstName
 		this.lastName = lastName
+	}
+
+	User(String username, String password, String firstName, String lastName, String email) {
+		this(username, password, firstName, lastName)
+		this.email = email;
 	}
 
 	@Override
@@ -68,6 +74,7 @@ class User implements Serializable {
 		password blank: false
 		firstName blank: false
 		lastName blank: false
+		email nullable: true
 		reservationLimit nullable: true
 		birthday nullable: true
 		manager nullable: true

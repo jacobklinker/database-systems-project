@@ -20,13 +20,4 @@ class IndexController {
         redirect(uri: targetUri)
     }
 
-    def email() {
-        mailService.sendMail {
-            to "jklinker1@gmail.com"
-            subject "test email"
-            text "just trying this config out..."
-        }
-
-        redirect action: 'index'
-    }
 }

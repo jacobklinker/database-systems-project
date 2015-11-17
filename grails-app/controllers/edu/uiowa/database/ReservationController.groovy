@@ -6,6 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class ReservationController {
 
 	def springSecurityService
+    def mailService
 
     def index() {
         def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
@@ -87,6 +88,15 @@ class ReservationController {
 
         new Reservation(user: springSecurityService.currentUser, resource: room, time: date).save(flush: true)
         flash.message = "Reservation created successfully!"
+
+        if (springSecurityService.currentUser.email != null) {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "New Reservation Scheduled!"
+                text "You've just scheduled a new reservation for ${room.description} on ${date}."
+            }
+        }
+        
         redirect action: "index"
     }
 
