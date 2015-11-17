@@ -6,6 +6,7 @@ import grails.plugin.springsecurity.annotation.Secured
 class SignUpController {
 
     def springSecurityService
+    def mailService
 
     def index() {
         String password = params.password
@@ -23,6 +24,7 @@ class SignUpController {
     	String username = params.username
     	String password = params.password
         String confirm = params.confirm
+        String email = params.email
         def createdBy = springSecurityService.currentUser
         Gender gender = Gender.findById(params.gender)
         Date birthday = params.birthday
@@ -33,7 +35,7 @@ class SignUpController {
                 redirect (controller:'signUp')
         } else {
             if (password == confirm) {
-                User u = new User(username, password,firstname,lastname).save()
+                User u = new User(username, password,firstname,lastname, email).save()
                 Role r = Role.findByAuthority('ROLE_USER')
                 boolean created = UserRole.create(u, r, true)
                 u.manager = createdBy
@@ -42,6 +44,15 @@ class SignUpController {
                         u.gender = gender
                         u.birthday = birthday
                         u.company = company
+
+                        if (u.email != null) {
+                            mailService.sendMail {
+                                to u.email
+                                subject "Welcome to Reserve!"
+                                body "You've been signed up by ${u.manager.firstName} ${u.manager.lastName}. You can start using the app now, ask them for your password!"
+                            }
+                        }
+
                         redirect (controller: 'user', action: 'information', params: [username: username])
                 } else {
                         render 'Failed to create this user'

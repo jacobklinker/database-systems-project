@@ -22,15 +22,20 @@
         		<label for='username'>Username:</label>
         		<g:textField name='username'></g:textField>
         	</div>
+
+            <div>
+                <label for='email'>Email:</label>
+                <g:textField name='email'></g:textField>
+            </div>
                 
         	<div>
         		<label for='password'>Password:</label>
-        		<g:textField name='password'></g:textField>
+        		<g:passwordField name='password'></g:passwordField>
         	</div>
                 
             <div>
         		<label for='confirm'>Confirm Password:</label>
-        		<g:textField name='confirm'></g:textField>
+        		<g:passwordField name='confirm'></g:passwordField>
         	</div>
                 
             <div>
