@@ -7,6 +7,7 @@ import grails.plugin.springsecurity.SpringSecurityService
 class IndexController {
 
 	def springSecurityService
+    def mailService
 
     def index() {
     	render(view: 'index', model: [
@@ -17,5 +18,15 @@ class IndexController {
     def back() {
         def targetUri = params.targetUri ?: "/"
         redirect(uri: targetUri)
+    }
+
+    def email() {
+        mailService.sendMail {
+            to "jklinker1@gmail.com"
+            subject "test email"
+            text "just trying this config out..."
+        }
+
+        redirect action: 'index'
     }
 }
