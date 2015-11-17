@@ -39,7 +39,20 @@ class ReportsController {
 
 	@Secured(['ROLE_ADMIN', 'ROLE_MANAGER'])
     def viewReport() {
-    	render text: "view report here"
+        def lastMonth = new Date() - 30
+    	def mySubordinatesReservations = []
+        def myUsers = User.findAllByManager(springSecurityService.currentUser)
+
+        if (myUsers != null && myUsers.size() > 0) {
+            myUsers.each { user ->
+                def reservations = Reservation.findAllByUserAndTimeGreaterThanEqualsAndTimeLessThanEquals(user, lastMonth, new Date())
+                reservations.each {
+                    mySubordinatesReservations << it
+                }
+            }
+        }
+
+        render(view: "viewReport", model: [reservations: mySubordinatesReservations])
     }
 
 }

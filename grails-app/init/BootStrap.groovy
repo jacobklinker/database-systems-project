@@ -19,7 +19,7 @@ class BootStrap {
 
 
         def admin = new User('admin', 'password', 'Jake', 'Klinker', 'jklinker1@gmail.com').save()
-        def manager = new User('manager', 'password', 'Bo', 'Zhou').save()
+        def manager = new User('manager', 'password', 'Bo', 'Zhou', 'jklinker1@gmail.com').save()
         def user = new User('user', 'password', 'Lufan', 'Li').save()
 
         UserRole.create(admin, adminRole, true)
@@ -262,6 +262,12 @@ class BootStrap {
                         resource: room3).save()
         new Reservation(time: Date.parse('yyMMddHHmmss', '151115133000'),
                         user: admin,
+                        resource: room7).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '150915133000'),
+                        user: user,
+                        resource: room7).save()
+        new Reservation(time: Date.parse('yyMMddHHmmss', '160915133000'),
+                        user: user,
                         resource: room7).save()
         }
     }
