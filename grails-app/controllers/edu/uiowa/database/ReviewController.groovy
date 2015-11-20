@@ -10,7 +10,19 @@ class ReviewController {
     }
 
     def createReview() {
+		def rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+		[rooms: rooms]
+    }
 
+    def saveReview() {
+    	def r = params.room.split(" ")
+        def room = Resource.findById(r[r.length - 1])
+        def rating = Integer.parseInt(params.rating)
+        def feedback = params.feedback
+
+        new Review(resource: room, rating: rating, feedback: feedback).save(flush: true)
+        flash.message = "Review saved!"
+    	redirect action: 'index'
     }
 
     def viewAllReviews() {
