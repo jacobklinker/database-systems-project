@@ -5,6 +5,7 @@
             <a class="mdl-navigation__link" href="${createLink(controller: 'index', action: 'index')}">Home</a>
             <a class="mdl-navigation__link" href="${createLink(controller: 'reservation', action: 'createReservation')}">Reserve a Resource</a>
             <a class="mdl-navigation__link" href="${createLink(controller: 'reservation')}">View My Reservations</a>
+            <a class="mdl-navigation__link" href="${createLink(controller: 'review')}">Manage Reviews</a>
             <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
                 <a class="mdl-navigation__link" href="${createLink(controller: 'signUp')}">Create New User</a>
             </sec:ifAnyGranted>
