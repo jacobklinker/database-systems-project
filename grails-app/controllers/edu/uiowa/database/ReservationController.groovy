@@ -26,7 +26,13 @@ class ReservationController {
     }
 
     def createReservation() {
-    	render(view: "createReservation")
+        def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
+
+        if (myReservations.size() >= springSecurityService.currentUser.reservationLimit) {
+            render(view: "overReservationLimit")
+        } else {
+            render(view: "createReservation")
+        }
     }
 
     def reserveByRoom() {

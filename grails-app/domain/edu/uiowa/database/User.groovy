@@ -11,7 +11,7 @@ class User implements Serializable {
 	String firstName
 	String lastName
 	String email
-	int reservationLimit
+	int reservationLimit = 10
 	Date birthday
 	User manager
 	Gender gender
@@ -86,5 +86,6 @@ class User implements Serializable {
 		password column: '`password`'
 		table '`user`'
 		sort "username"
+		reservationLimit defaultValue: "10"
 	}
 }
