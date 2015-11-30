@@ -1,8 +1,6 @@
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <thead>
-        <g:if test="${displayUser}">
-    	   <th>ID</th>
-        </g:if>
+    	<th>ID</th>
     	<th class="mdl-data-table__cell--non-numeric">Time</th>
         <g:if test="${displayUser}">
         	<th class="mdl-data-table__cell--non-numeric">User First Name</th>
@@ -23,9 +21,7 @@
     <tbody>
     	<g:each in="${reservations}" var="reservation">
     		<tr class='clickable-row' data-href='${createLink(controller: 'reservation', action: 'changeReservation', id: reservation.id)}'>
-                <g:if test="${displayUser}">
-                    <td>${reservation.id}</td>
-                </g:if>
+                <td>${reservation.id}</td>
     			<td class="mdl-data-table__cell--non-numeric">${reservation.time}</td>
                 <g:if test="${displayUser}">
         			<g:if test="${reservation.user != null}">
