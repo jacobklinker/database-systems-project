@@ -10,6 +10,7 @@ class ReservationController {
 
     def index() {
         def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
+        def myWaitlists = Waitlist.findAllByUser(springSecurityService.currentUser)
         def mySubordinatesReservations = []
         def myUsers = User.findAllByManager(springSecurityService.currentUser)
 
@@ -22,7 +23,7 @@ class ReservationController {
             }
         }
 
-    	render(view: "index", model: [reservations: myReservations, subordinatesReservations: mySubordinatesReservations])
+    	render(view: "index", model: [reservations: myReservations, subordinatesReservations: mySubordinatesReservations, waitlists: myWaitlists])
     }
 
     def createReservation() {
@@ -76,16 +77,17 @@ class ReservationController {
             availableDates << new Date(date.getTime() + (16 * thirty_minutes) + (i * thirty_minutes))
         }
 
+        def takenDates = []
         // remove available dates if it exists on a reservation already
         reservations.each {
             for (int i = 0; i < availableDates.size(); i++) {
                 if (it.time.getTime() == availableDates.get(i).getTime()) {
-                    availableDates.remove(i--);
+                    takenDates << availableDates.remove(i--)
                 }
             }
         }
 
-        [dates: availableDates, room: room]
+        [dates: availableDates, room: room, waitlistDates: takenDates]
     }
 
     def saveRoomWithTime() {
@@ -103,6 +105,21 @@ class ReservationController {
             }
         }
         
+        redirect action: "index"
+    }
+
+    def saveRoomWithTimeWaitlist() {
+        def date = new Date(params.date)
+        def room = Resource.findById(params.room)
+        def reservation = Reservation.findByResourceAndTime(room, date)
+
+        if (reservation == null) {
+            flash.message = "Error finding this reservation, not added to waitlist."
+        } else {
+            new Waitlist(reservation: reservation, user: springSecurityService.currentUser).save(flush: true)
+            flash.message = "Added to the waitlist for this reservation, you'll be notified if this time opens up."
+        }
+
         redirect action: "index"
     }
 
@@ -142,6 +159,18 @@ class ReservationController {
 
     def changeReservation() {
         def reservation = Reservation.findById(params.id)
+        def waitlists = Waitlist.findByReservation(reservation)
+
+        waitlists.each {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "Waitlist Opened Up!"
+                text "A reservation was just removed that you were on the waitlist for, jump on it now to pick it up before someone else does!\n\n${reservation.resource.description}, ${reservation.time}"
+            }
+
+            it.delete()
+        }
+
         reservation.delete()
         redirect action: 'reserveByRoom'
     }
