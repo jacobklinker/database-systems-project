@@ -6,7 +6,7 @@ import grails.plugin.springsecurity.SpringSecurityService
 @Secured('permitAll')
 class IndexController {
 
-	def springSecurityService
+    def springSecurityService
     def mailService
 
     def index() {
@@ -15,9 +15,5 @@ class IndexController {
     		])
     }
     
-    def back() {
-        def targetUri = params.targetUri ?: "/"
-        redirect(uri: targetUri)
-    }
 
 }

@@ -9,17 +9,15 @@
     <body>
         <g:form controller='user' action='change' params="[username:username]">
             <div>
-                <label for='birthday'>Birthday:</label>
-                <g:datePicker name="birthday" value="${new Date()}" precision="day" />
-            </div>
-            <div>
                 <label for='company'>Company:</label>
                 <g:select name='company' from="${Company.findAll()}" value="${company}" optionKey="id" optionValue="name" />
             </div>
-            <br>First Name: ${firstname}</br>
-            <br>Last Name: ${lastname}</br>
+            <div>
+                <label for='email'>Email:</label>
+                <g:textField name='email' value="${email}"></g:textField>
+            </div>
             <g:actionSubmit  value="Save" action="save" />
-            <g:actionSubmit  controller='index' value="Back" action="back" />
+            <g:actionSubmit  controller='user' value="Cancel" action="backtoInformation" />
         </g:form>
     </body>
 </html>

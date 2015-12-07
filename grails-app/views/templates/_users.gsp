@@ -1,14 +1,14 @@
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <thead>
-    	<th>ID</th>
-    	<th class="mdl-data-table__cell--non-numeric">Username</th>
-    	<th class="mdl-data-table__cell--non-numeric">First Name</th>
-    	<th class="mdl-data-table__cell--non-numeric">Last Name</th>
-        <th class="mdl-data-table__cell--non-numeric">Email</th>
-    	<th class="mdl-data-table__cell--non-numeric">Birthday</th>
-    	<th class="mdl-data-table__cell--non-numeric">Manager</th>
-    	<th class="mdl-data-table__cell--non-numeric">Gender</th>
-    	<th class="mdl-data-table__cell--non-numeric">Company</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort:'id'])}'>ID</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'username'])}'>Username</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'firstName'])}'>First Name</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'lastName'])}'>Last Name</th>
+        <th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'email'])}'>Email</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'birthday'])}'>Birthday</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'manager'])}'>Manager</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'gender'])}'>Gender</th>
+    	<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'sortBy', params: [sort: 'company'])}'>Company</th>
     </thead>
     <tbody>
     	<g:each in="${users}" var="user">

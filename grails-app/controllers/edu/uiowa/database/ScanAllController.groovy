@@ -10,7 +10,12 @@ class ScanAllController {
     def index() {
         render(view:'index', model: [user: User.list()])
     }
-
+    
+    def allUser() {
+        def users = User.list()
+        render(view:'createdBy', model: [users: users])
+    }
+    
     def createdBy() {
         def manager = springSecurityService.currentUser
         def usersCreatedByManager = User.findAllByManager(manager)

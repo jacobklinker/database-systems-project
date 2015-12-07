@@ -19,8 +19,6 @@
                 <label for='confirmPassword'>Confirm password:</label>
                 <g:textField name='confirmPassword'/>
             </div>
-            <p> Old Password: ${old}</p>
-            <p> input: ${inputold}</p>
             <g:actionSubmit  value="Change Password" action="changePassword" />
             <g:actionSubmit  value="Cancel" action="cancel" />
         </g:form>
