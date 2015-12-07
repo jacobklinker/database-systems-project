@@ -174,5 +174,139 @@ class ReservationController {
         reservation.delete()
         redirect action: 'reserveByRoom'
     }
-    
+
+    def recureserveByDay() {
+        def timeslots = TimeSlot.getTimeslots()
+        [timeslots: timeslots]
+    }
+
+    def recureserveByWeek() {
+        def timeslots = TimeSlot.getTimeslots()
+        [timeslots: timeslots]
+    }
+
+    def recureserveByMonth() {
+        def timeslots = TimeSlot.getTimeslots()
+        [timeslots: timeslots]
+    }
+
+    def submitRecureserveTimeDay(){
+        def date = params.date
+        def timeParts = params.time.split(':')
+        date.setHours(Integer.parseInt(timeParts[0]))
+        date.setMinutes(Integer.parseInt(timeParts[1]))
+        
+        def reservations = Reservation.findAllByTime(date)
+        def rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+
+        reservations.each {
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).id == it.resource.id) {
+                    rooms.remove(i--);
+                }
+            }
+        }
+
+        [rooms: rooms, date: date]
+    }
+
+    def submitRecureserveTimeWeek(){
+        def date = params.date
+        def timeParts = params.time.split(':')
+        date.setHours(Integer.parseInt(timeParts[0]))
+        date.setMinutes(Integer.parseInt(timeParts[1]))
+        
+        def reservations = Reservation.findAllByTime(date)
+        def rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+
+        reservations.each {
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).id == it.resource.id) {
+                    rooms.remove(i--);
+                }
+            }
+        }
+
+        [rooms: rooms, date: date]
+    }
+
+    def submitRecureserveTimeMonth(){
+        def date = params.date
+        def timeParts = params.time.split(':')
+        date.setHours(Integer.parseInt(timeParts[0]))
+        date.setMinutes(Integer.parseInt(timeParts[1]))
+        
+        def reservations = Reservation.findAllByTime(date)
+        def rooms = Resource.findAllByType(ResourceType.findByDescription("Room"))
+
+        reservations.each {
+            for (int i = 0; i < rooms.size(); i++) {
+                if (rooms.get(i).id == it.resource.id) {
+                    rooms.remove(i--);
+                }
+            }
+        }
+
+        [rooms: rooms, date: date]
+    }
+
+    def saveRecureserveByDay() {
+        def date = new Date(params.date)
+        def room = Resource.findById(params.room)
+
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date).save(flush: true)
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date+1).save(flush: true)
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date+2).save(flush: true)
+        flash.message = "Recurring Reservation created successfully!"
+
+        if (springSecurityService.currentUser.email != null) {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "New Reservation Scheduled!"
+                text "You've just scheduled a new reservation for ${room.description} on ${date}."
+            }
+        }
+        
+        redirect action: "index"
+    }
+
+    def saveRecureserveByWeek(){
+        def date = new Date(params.date)
+        def room = Resource.findById(params.room)
+
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date).save(flush: true)
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date+7).save(flush: true)
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date+14).save(flush: true)
+        flash.message = "Recurring Reservation created successfully!"
+
+        if (springSecurityService.currentUser.email != null) {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "New Reservation Scheduled!"
+                text "You've just scheduled a new reservation for ${room.description} on ${date}."
+            }
+        }
+        
+        redirect action: "index"
+    }
+
+    def saveRecureserveByMonth() {
+        def date = new Date(params.date)
+        def room = Resource.findById(params.room)
+
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date).save(flush: true)
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date+30).save(flush: true)
+        new Reservation(user: springSecurityService.currentUser, resource: room, time: date+60).save(flush: true)
+        flash.message = "Recurring Reservation created successfully!"
+
+        if (springSecurityService.currentUser.email != null) {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "New Reservation Scheduled!"
+                text "You've just scheduled a new reservation for ${room.description} on ${date}."
+            }
+        }
+        
+        redirect action: "index"
+    }
 }
