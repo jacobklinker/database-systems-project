@@ -1,23 +1,23 @@
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <thead>
         <g:if test="${displayUser}">
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subId'])}'>ID</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subId'])}'>Reservation ID</th>
             <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subTime'])}'>Time</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subUserFirstName'])}'>First Name</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subUserLastName'])}'>Last Name</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subCompany'])}'>Company</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceDes'])}'>Description</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceType'])}'>Type</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceParent'])}'>Parent</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceQuality'])}'>Quality</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subUserFirstName'])}'>User First Name</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subUserLastName'])}'>User Last Name</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subCompany'])}'>User Company</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceDes'])}'>Resource Description</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceType'])}'>Resource Type</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceParent'])}'>Resource Parent</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'subResourceQuality'])}'>Resource Quality</th>
         </g:if>
         <g:else>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'id'])}'>ID</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'id'])}'>Reservation ID</th>
             <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'time'])}'>Time</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'description'])}'>Description</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'type'])}'>Type</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'parent'])}'>Parent</th>
-            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'quality'])}'>Quality</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'description'])}'>Resource Description</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'type'])}'>Resource Type</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'parent'])}'>Resource Parent</th>
+            <th class='clickable-cell' data-href='${createLink(controller: 'reservation', action: 'sortBy', params: [sort:'quality'])}'>Resource Quality</th>
         </g:else>
     </thead>
     <tbody>

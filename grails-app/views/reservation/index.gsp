@@ -15,11 +15,22 @@
 	        <div class="mdl-grid">
 				<div class="inner_center">
 			        <div class="data_table">
-                        Click on any reservation to modify it:
+                        My Reservations (click any to modify it):
 			        	<g:render template="/templates/reservation_table" model="[displayUser: false]"/>
 			        </div>
 			    </div>
 			</div>
+
+            <g:if test="${waitlists != null && waitlists.size() > 0}">
+                <div class="mdl-grid">
+                    <div class="inner_center">
+                        <div class="data_table">
+                            Reservations I am on the waitlist for:
+                            <g:render template="/templates/reservation_table" model="[displayUser: true, reservations: waitlists.reservation]"/>
+                        </div>
+                    </div>
+                </div>
+            </g:if>
 
             <g:if test="${subordinatesReservations != null && subordinatesReservations.size() > 0}">
                 <div class="mdl-grid">
