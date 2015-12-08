@@ -161,6 +161,23 @@ class ReservationController {
     def changeReservation() {
         def reservation = Reservation.findById(params.id)
         def waitlists = Waitlist.findByReservation(reservation)
+        waitlists.each {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "Waitlist Opened Up!"
+                text "A reservation was just removed that you were on the waitlist for, jump on it now to pick it up before someone else does!\n\n${reservation.resource.description}, ${reservation.time}"
+            }
+
+            it.delete()
+        }
+        
+        reservation.delete()
+        redirect action: 'reserveByRoom'
+    }
+    
+    def cancelReservation() {
+        def reservation = Reservation.findById(params.id)
+        def waitlists = Waitlist.findByReservation(reservation)
 
         waitlists.each {
             mailService.sendMail {
@@ -173,9 +190,8 @@ class ReservationController {
         }
 
         reservation.delete()
-        redirect action: 'reserveByRoom'
+        redirect action: 'index'
     }
-    
     def sortBy() {
         def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
         def mySubordinatesReservations = []

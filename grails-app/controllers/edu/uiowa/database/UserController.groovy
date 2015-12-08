@@ -71,60 +71,67 @@ class UserController {
             user = User.findById(Integer.parseInt(params.id))
         }
 
-        render(view:'information', model: [username: user.username, password: user.password, 
-            firstname: user.firstName, lastname: user.lastName, birthday: user.birthday,
-            gender: user.gender, company: user.company, manager: user.manager, email:user.email])
+        render(view:'information', model: [user:user])
     }
     
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def changeInformation() {
-            def user = User.findByUsername(params.username)
-            render( view:'changeInformation', model: [ username:user.username, password:user.password, 
-                firstname:user.firstName, lastname:user.lastName, birthday:user.birthday,
-                gender:user.gender, company:user.company, manager:user.manager, email:user.email] )
+        def user
+        if (params.username != null) {
+            user = User.findByUsername(params.username)
+        } else {
+            user = User.findById(Integer.parseInt(params.id))
+        }
+        render( view:'changeInformation', model: [ user:user] )
             
     }
 
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def passwordPage() {
             def user = springSecurityService.currentUser
-            def old = params.old
-            def inputold = params.inputold
-            [username:user.username, old:old, inputold:inputold]
+            render( view:'passwordPage', model: [user:user])
     }
+    
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def changePassword() {
             def user = springSecurityService.currentUser
             String newPassword = params.newPassword
             String confirmPassword = params.confirmPassword 
-
             if (!passwordEncoder.isPasswordValid(user.password, params.oldPassword, null)) {
                 flash.message = 'Wrong password!'
+                redirect action:'passwordPage'
             } else if (newPassword!=confirmPassword) {
                 flash.message = 'Password does not fit!'
+                redirect action:'passwordPage'
             } else {
                 user.password = newPassword
                 user.save()
                 flash.message = 'Password changed successfully!'
+                redirect(controller:'index')
             }
 
-            redirect (controller: 'index')
     }
+    
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def save() {
-            def user = User.findByUsername(params.username)
-            if(user.email != params.email) {
-                user.email = params.email
-                mailService.sendMail {
+            def user = User.findById(Integer.parseInt(params.id))
+            if(params.company != null) {
+                user.company = Company.findById(params.company)
+            }
+            if(params.email != null) {
+                if(user.email != params.email) {
+                    user.email = email
+                    mailService.sendMail {
                                 to user.email
                                 subject "Your change is successful!"
                                 body "You've just changed your email address successfully."
-                            }
+                    }
+                }
             }
-            user.company = Company.findById(params.company)
-            redirect (controller:'user', action:'information', params:[username:user.username])
+            redirect (controller:'user', action:'information', params:[user:user, id:user.id])
     }
-    @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
+    
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER"])
     def back() {
         def currentUser = springSecurityService.currentUser
         def userRole = UserRole.findByUser(currentUser)
@@ -136,10 +143,12 @@ class UserController {
         }
         
     }
-    @Secured(["ROLE_ADMIN"])
-    def backtoInformation() {
-        def username = params.username
-        redirect (controller:'user', action:'information', params:[username:username])
+    
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
+    def backToInformation() {
+            def user = User.findById(Integer.parseInt(params.id))
+            
+            redirect (controller:'user', action:'information', params:[id:user.id])
     }
       
     def sortBy() {
@@ -156,5 +165,7 @@ class UserController {
         render(view:'createdBy', model: [users: usersCreatedByManager])
     }
     
-   
+    def cancel() {
+        redirect uri: '/'
+    }
 }

@@ -22,7 +22,7 @@
     </thead>
     <tbody>
     	<g:each in="${reservations}" var="reservation">
-                <tr class='clickable-row' data-href='${createLink(controller: 'reservation', action: 'changeReservation', id: reservation.id)}'>
+                <tr>
                     <g:if test="${displayUser}">
                         <td>${reservation.id}</td>
                         <td class="mdl-data-table__cell--non-numeric">${reservation.time}</td>
@@ -91,6 +91,12 @@
     				<td class="mdl-data-table__cell--non-numeric"></td>
     			</g:else>
                     </g:else>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <div class="btn-group-vertical">
+                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="${createLink(controller: 'reservation', action: 'changeReservation', id: reservation.id)}">change</a>
+                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="${createLink(controller: 'reservation', action: 'cancelReservation', id: reservation.id)}">cancel</a>
+                        </div>
+                    </td>
     		</tr>
     	</g:each> 
     </tbody>

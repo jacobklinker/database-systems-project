@@ -5,17 +5,21 @@
         <title>User Information</title>
     </head>
     <body>
-        <g:form controller="user" params="[username:username]">
-            <br>User: ${username}</br>
-            <br>First Name: ${firstname}</br>
-            <br>Last Name: ${lastname}</br>
-            <br>Email: ${email}</br>
+        <g:form controller="user" action='changeInformation' id="${user.id}">
+            <br>User: ${user.username}</br>
+            <br>First Name: ${user.firstName}</br>
+            <br>Last Name: ${user.lastName}</br>
+            <br>Email: ${user.email}</br>
             <br>Birthday: ${birthday}</br>
-            <br>Gender: ${gender.name}</br>
-            <br>Company: ${company.name}</br>
-            <br>Manager: ${manager}</br>
-            <g:actionSubmit  value="Change information" action="changeInformation" />
-            <g:actionSubmit  value="Back" action="back"/>
+            <br>Gender: ${user.gender.name}</br>
+            <br>Company: ${user.company.name}</br>
+            <br>Manager: ${user.manager}</br>
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Change Information"/>  
         </g:form>
+        <sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_MANAGER">
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="${createLink(controller: 'user', action: 'back')}">Back</a>
+        </sec:ifAnyGranted>
+                
+        
     </body>
 </html>

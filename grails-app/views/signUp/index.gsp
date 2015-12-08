@@ -25,7 +25,7 @@
 
                 <div>
                         <label for='email'>Email:</label>
-                        <g:textField name='email' required=''></g:textField>
+                        <input type="email" name='email' required=''>
                 </div>
                 
         	<div>

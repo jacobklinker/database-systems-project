@@ -7,17 +7,18 @@
         <title>Change User Information</title>
     </head>
     <body>
-        <g:form controller='user' action='change' params="[username:username]">
+        <g:form controller='user' id="${user.id}" action="save">
+            
             <div>
                 <label for='company'>Company:</label>
                 <g:select name='company' from="${Company.findAll()}" value="${company}" optionKey="id" optionValue="name" />
             </div>
+            
             <div>
-                <label for='email'>Email:</label>
-                <g:textField name='email' value="${email}"></g:textField>
+               <label for='email'>Email:</label>
+               <input type="email" name='email' value="${user.email}">
             </div>
-            <g:actionSubmit  value="Save" action="save" />
-            <g:actionSubmit  controller='user' value="Cancel" action="backtoInformation" />
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Save"/>
         </g:form>
     </body>
 </html>

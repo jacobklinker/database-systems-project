@@ -5,23 +5,27 @@
         <title>Change Password</title>
     </head>
     <body>
-        <g:form controller="user">
-            <p>Change your password!</p>
+        <g:form controller="user" action="changePassword">
+            <g:if test="${flash.message}"/>
+            <g:else>
+	    Change your password!
+            </g:else>
+            
             <div>
                 <label for='oldPassword'>Old password:</label>
-                <g:textField name='oldPassword'/>
+                <g:textField name='oldPassword' required=''></g:textField>
             </div>
             <div>
                 <label for='newPassword'>New password:</label>
-                <g:textField name='newPassword'/>
+                <g:textField name='newPassword' required=''></g:textField>
             </div>
             <div>
                 <label for='confirmPassword'>Confirm password:</label>
-                <g:textField name='confirmPassword'/>
+                <g:textField name='confirmPassword' required=''></g:textField>
             </div>
-            <g:actionSubmit  value="Change Password" action="changePassword" />
-            <g:actionSubmit  value="Cancel" action="cancel" />
+            <input class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" type="submit" value="Save"/>
         </g:form>
+         <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="${createLink(controller: 'index', action: 'index')}">Cancel</a>
     </body>
 
 

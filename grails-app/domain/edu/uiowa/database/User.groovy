@@ -12,6 +12,7 @@ class User implements Serializable {
 	String lastName
 	String email
 	int reservationLimit = 10
+        int currentReservationNum
 	Date birthday
 	User manager
 	Gender gender
