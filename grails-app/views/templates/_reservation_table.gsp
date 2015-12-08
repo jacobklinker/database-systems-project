@@ -93,8 +93,12 @@
                     </g:else>
                     <td class="mdl-data-table__cell--non-numeric">
                         <div class="btn-group-vertical">
-                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="${createLink(controller: 'reservation', action: 'changeReservation', id: reservation.id)}">change</a>
-                            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" href="${createLink(controller: 'reservation', action: 'cancelReservation', id: reservation.id)}">cancel</a>
+                            <a class="mdl-button mdl-js-button mdl-button--icon" href="${createLink(controller: 'reservation', action: 'changeReservation', id: reservation.id)}">
+                                <i class="material-icons">edit</i>
+                            </a>
+                            <a class="mdl-button mdl-js-button mdl-button--icon" href="${createLink(controller: 'reservation', action: 'cancelReservation', id: reservation.id)}">
+                                <i class="material-icons">delete</i>
+                            </a>
                         </div>
                     </td>
     		</tr>

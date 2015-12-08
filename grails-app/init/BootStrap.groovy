@@ -234,34 +234,34 @@ class BootStrap {
                                     parent: room2,
                                     type: projector).save()
 
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151104123000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151209123000'),
                             user: user,
                             resource: room1).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151104123000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151209123000'),
                             user: manager,
                             resource: room2).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151104130000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151209130000'),
                             user: user,
                             resource: room3).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151104133000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151209133000'),
                             user: user,
                             resource: room3).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151104133000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151209133000'),
                             user: manager,
                             resource: room7).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151115123000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151210123000'),
                             user: admin,
                             resource: room1).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151115123000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151210123000'),
                             user: admin,
                             resource: room2).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151115130000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151210130000'),
                             user: admin,
                             resource: room3).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151115133000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151210133000'),
                             user: admin,
                             resource: room3).save()
-            new Reservation(time: Date.parse('yyMMddHHmmss', '151115133000'),
+            new Reservation(time: Date.parse('yyMMddHHmmss', '151210133000'),
                             user: admin,
                             resource: room7).save()
             new Reservation(time: Date.parse('yyMMddHHmmss', '150915133000'),
