@@ -153,16 +153,22 @@ class UserController {
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def sortBy() {
         def manager = springSecurityService.currentUser
-        
+        def userRole = UserRole.findByUser(manager)
+        def usersCreatedByManager
         if(order == "desc") {
             order = "asc"
         }
         else {
             order = "desc"
         }
-        def usersCreatedByManager = User.findAllByManager(manager,[sort: params.sort, order: order])
+        if(userRole.role.authority == "ROLE_ADMIN"){
+            usersCreatedByManager = User.list(sort:params.sort, order:order)
+        } else {
+            usersCreatedByManager = User.findAllByManager(manager,[sort: params.sort, order: order])
+        }
+        
 
-        render(controller:'scanAll', view:'createdBy', model: [users: usersCreatedByManager])
+        render( view:'createdBy', model: [users: usersCreatedByManager])
     }
     
     def cancel() {
