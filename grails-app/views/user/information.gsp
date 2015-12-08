@@ -10,7 +10,7 @@
             <br>First Name: ${user.firstName}</br>
             <br>Last Name: ${user.lastName}</br>
             <br>Email: ${user.email}</br>
-            <br>Birthday: ${birthday}</br>
+            <br>Birthday: ${user.birthday}</br>
             <br>Gender: ${user.gender.name}</br>
             <br>Company: ${user.company.name}</br>
             <br>Manager: ${user.manager}</br>

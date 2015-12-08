@@ -150,7 +150,7 @@ class UserController {
             
             redirect (controller:'user', action:'information', params:[id:user.id])
     }
-      
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def sortBy() {
         def manager = springSecurityService.currentUser
         
@@ -162,7 +162,7 @@ class UserController {
         }
         def usersCreatedByManager = User.findAllByManager(manager,[sort: params.sort, order: order])
 
-        render(view:'createdBy', model: [users: usersCreatedByManager])
+        render(controller:'scanAll', view:'createdBy', model: [users: usersCreatedByManager])
     }
     
     def cancel() {
