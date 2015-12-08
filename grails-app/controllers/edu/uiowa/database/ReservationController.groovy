@@ -5,9 +5,10 @@ import grails.plugin.springsecurity.annotation.Secured
 @Secured(['ROLE_USER', 'ROLE_MANAGER', 'ROLE_ADMIN'])
 class ReservationController {
 
-	def springSecurityService
+    def springSecurityService
     def mailService
-
+    def static order = 'asc'
+    
     def index() {
         def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
         def myWaitlists = Waitlist.findAllByUser(springSecurityService.currentUser)
@@ -160,6 +161,23 @@ class ReservationController {
     def changeReservation() {
         def reservation = Reservation.findById(params.id)
         def waitlists = Waitlist.findByReservation(reservation)
+        waitlists.each {
+            mailService.sendMail {
+                to springSecurityService.currentUser.email
+                subject "Waitlist Opened Up!"
+                text "A reservation was just removed that you were on the waitlist for, jump on it now to pick it up before someone else does!\n\n${reservation.resource.description}, ${reservation.time}"
+            }
+
+            it.delete()
+        }
+        
+        reservation.delete()
+        redirect action: 'reserveByRoom'
+    }
+    
+    def cancelReservation() {
+        def reservation = Reservation.findById(params.id)
+        def waitlists = Waitlist.findByReservation(reservation)
 
         waitlists.each {
             mailService.sendMail {
@@ -172,8 +190,67 @@ class ReservationController {
         }
 
         reservation.delete()
-        redirect action: 'reserveByRoom'
+        redirect action: 'index'
     }
+    def sortBy() {
+        def myReservations = Reservation.findAllByUser(springSecurityService.currentUser)
+        def mySubordinatesReservations = []
+        def myUsers = User.findAllByManager(springSecurityService.currentUser)
+        
+        if (myUsers != null && myUsers.size() > 0) {
+            myUsers.each { user ->
+                def reservations = Reservation.findAllByUser(user)
+                reservations.each {
+                    mySubordinatesReservations << it
+                }
+            }
+        }
+        
+        if(order == "asc") {
+            switch (params.sort) {
+                case {it == 'id'} : myReservations.sort{it.id}; break;
+                case {it == 'time'} : myReservations.sort{it.time}; break;
+                case {it == 'description'} : myReservations.sort{it.resource.description}; break;
+                case {it == 'type'} : myReservations.sort{it.resource.type.description}; break;
+                case {it == 'parent'} : myReservations.sort{it.resource.parent.description}; break;
+                case {it == 'quality'} : myReservations.sort{it.resource.quality} ; break;
+                case {it == 'subId'} : mySubordinatesReservations.sort{it.id}; break;
+                case {it == 'subTime'} : mySubordinatesReservations.sort{it.time}; break;
+                case {it == 'subUserFirstName'} : mySubordinatesReservations.sort{it.user.firstName}; break;
+                case {it == 'subUserLastName'} : mySubordinatesReservations.sort{it.user.lastName}; break;
+                case {it == 'subUserCompany'} : mySubordinatesReservations.sort{it.user.company}; break;
+                case {it == 'subResourceDes'} : mySubordinatesReservations.sort{it.resource.description}; break;
+                case {it == 'subResourceType'} : mySubordinatesReservations.sort{it.resource.type.description}; break;
+                case {it == 'subResourceParent'} : mySubordinatesReservations.sort{it.resource.parent.description}; break;
+                case {it == 'subResourceQuality'} : mySubordinatesReservations.sort{it.resource.quality}; break;
+            }
+            order = "desc"
+        }
+        else {
+            switch (params.sort) {
+                case {it == 'id'} : myReservations = myReservations.sort{it.id}.reverse(); break;
+                case {it == 'time'} : myReservations = myReservations.sort{it.time}.reverse(); break;
+                case {it == 'description'} : myReservations = myReservations.sort{it.resource.description}.reverse(); break;
+                case {it == 'type'} : myReservations = myReservations.sort{it.resource.type.description}.reverse(); break;
+                case {it == 'parent'} : myReservations = myReservations.sort{it.resource.parent.description}.reverse(); break;
+                case {it == 'quality'} : myReservations = myReservations.sort{it.resource.quality}.reverse(); break;
+                case {it == 'subId'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.id}.reverse(); break;
+                case {it == 'subTime'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.time}.reverse(); break;
+                case {it == 'subUserFirstName'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.user.firstName}.reverse(); break;
+                case {it == 'subUserLastName'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.user.lastName}.reverse(); break;
+                case {it == 'subUserCompany'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.user.company}.reverse(); break;
+                case {it == 'subResourceDes'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.resource.description}.reverse(); break;
+                case {it == 'subResourceType'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.resource.type.description}.reverse(); break;
+                case {it == 'subResourceParent'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.resource.parent.description}.reverse(); break;
+                case {it == 'subResourceQuality'} : mySubordinatesReservations = mySubordinatesReservations.sort{it.resource.quality}.reverse(); break;
+            }
+            order = "asc"
+        }
+        
+    	render(view: "index", model: [reservations: myReservations, subordinatesReservations: mySubordinatesReservations])
+    }
+    
+    
 
     def recureserveByDay() {
         def timeslots = TimeSlot.getTimeslots()
@@ -309,4 +386,5 @@ class ReservationController {
         
         redirect action: "index"
     }
+
 }

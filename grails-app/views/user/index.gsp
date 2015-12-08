@@ -13,11 +13,11 @@
 		        	Click Row to Change User's Role:
 		        	<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
 		        		<thead>
-		        			<th>ID</th>
-		        			<th class="mdl-data-table__cell--non-numeric">First Name</th>
-		        			<th class="mdl-data-table__cell--non-numeric">Last Name</th>
-		        			<th class="mdl-data-table__cell--non-numeric">Username</th>
-		        			<th class="mdl-data-table__cell--non-numeric">Role</th>
+		        			<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'index', params: [sort: 'id'])}'>ID</th>
+		        			<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'index', params: [sort: 'firstName'])}'>First Name</th>
+		        			<th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'index', params: [sort: 'lastName'])}'>Last Name</th>
+                                                <th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'index', params: [sort: 'username'])}'>Username</th>
+                                                <th class='clickable-cell' data-href='${createLink(controller: 'user', action: 'index', params: [sort: 'role'])}'>Role</th>
 		        		</thead>
 		        		<tbody>
 		        			<g:each in="${users}" var="user">

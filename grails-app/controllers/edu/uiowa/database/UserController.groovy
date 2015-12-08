@@ -6,10 +6,34 @@ class UserController {
 
     def springSecurityService
     def passwordEncoder
-
+    def static order = 'asc'
+    
     @Secured(["ROLE_ADMIN"])
     def index() {
-    	render(view: 'index', model: [users: UserRole.getAll()])
+        def users = UserRole.getAll()
+        def temp = params.sort
+        if(order == "asc") {
+            switch (params.sort) {
+                case {it == 'firstName'} : users.sort{it.user.firstName}; break;
+                case {it == 'lastName'} : users.sort{it.user.lastName}; break;
+                case {it == 'id'} : users.sort{it.user.id}; break;
+                case {it == 'username'} : users.sort{it.user.username}; break;
+                case {it == 'role'} : users.sort{it.role.authority}; break;  
+            }
+            order = "desc"
+        }
+        else {
+            switch (params.sort) {
+                case {it == 'firstName'} : users = users.sort{it.user.firstName}.reverse(); break;
+                case {it == 'lastName'} : users = users.sort{it.user.lastName}.reverse(); break;
+                case {it == 'id'} : users = users.sort{it.user.id}.reverse(); break;
+                case {it == 'username'} : users = users.sort{it.user.username}.reverse(); break;
+                case {it == 'role'} : users  = users.sort{it.role.authority}.reverse(); break;       
+            }
+            order = "asc"
+        }
+       
+        render(view: 'index', model: [users: users])
     }
 
     @Secured(["ROLE_ADMIN"])
@@ -47,59 +71,101 @@ class UserController {
             user = User.findById(Integer.parseInt(params.id))
         }
 
-        render(view:'information', model: [username: user.username, password: user.password, 
-            firstname: user.firstName, lastname: user.lastName, birthday: user.birthday,
-            gender: user.gender, company: user.company, manager: user.manager])
+        render(view:'information', model: [user:user])
     }
     
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def changeInformation() {
-            def user = User.findByUsername(params.username)
-            render( view:'changeInformation', model: [ username:user.username, password:user.password, 
-                firstname:user.firstName, lastname:user.lastName, birthday:user.birthday,
-                gender:user.gender, company:user.company, manager:user.manager] )
+        def user
+        if (params.username != null) {
+            user = User.findByUsername(params.username)
+        } else {
+            user = User.findById(Integer.parseInt(params.id))
+        }
+        render( view:'changeInformation', model: [ user:user] )
             
     }
 
     @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def passwordPage() {
             def user = springSecurityService.currentUser
-            def old = params.old
-            def inputold = params.inputold
-            [username:user.username, old:old, inputold:inputold]
+            render( view:'passwordPage', model: [user:user])
     }
     
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
     def changePassword() {
             def user = springSecurityService.currentUser
             String newPassword = params.newPassword
             String confirmPassword = params.confirmPassword 
-
             if (!passwordEncoder.isPasswordValid(user.password, params.oldPassword, null)) {
                 flash.message = 'Wrong password!'
+                redirect action:'passwordPage'
             } else if (newPassword!=confirmPassword) {
                 flash.message = 'Password does not fit!'
+                redirect action:'passwordPage'
             } else {
                 user.password = newPassword
                 user.save()
                 flash.message = 'Password changed successfully!'
+                redirect(controller:'index')
             }
 
-            redirect (controller: 'index')
-    }
-
-    def save() {
-            def user = User.findByUsername(params.username)
-            user.gender = Gender.findById(params.gender)
-            user.company = Company.findById(params.company)
-            redirect (controller:'user', action:'information', params:[username:user.username])
-    }
-
-    def back() {
-        redirect(uri: request.getHeader('referer'))
-    }
-
-    def cancel() {
-        redirect controller: 'index'
     }
     
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
+    def save() {
+            def user = User.findById(Integer.parseInt(params.id))
+            if(params.company != null) {
+                user.company = Company.findById(params.company)
+            }
+            if(params.email != null) {
+                if(user.email != params.email) {
+                    user.email = email
+                    mailService.sendMail {
+                                to user.email
+                                subject "Your change is successful!"
+                                body "You've just changed your email address successfully."
+                    }
+                }
+            }
+            redirect (controller:'user', action:'information', params:[user:user, id:user.id])
+    }
+    
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER"])
+    def back() {
+        def currentUser = springSecurityService.currentUser
+        def userRole = UserRole.findByUser(currentUser)
+        if(userRole.role.authority == "ROLE_ADMIN") {
+            redirect(controller: 'scanAll', action: 'allUser')
+        }
+        if (userRole.role.authority == "ROLE_MANAGER") {
+            redirect(controller: 'scanAll', action: 'createdBy')
+        }
+        
+    }
+    
+    @Secured(["ROLE_ADMIN", "ROLE_MANAGER", "ROLE_USER"])
+    def backToInformation() {
+            def user = User.findById(Integer.parseInt(params.id))
+            
+            redirect (controller:'user', action:'information', params:[id:user.id])
+    }
+      
+    def sortBy() {
+        def manager = springSecurityService.currentUser
+        
+        if(order == "desc") {
+            order = "asc"
+        }
+        else {
+            order = "desc"
+        }
+        def usersCreatedByManager = User.findAllByManager(manager,[sort: params.sort, order: order])
+
+        render(view:'createdBy', model: [users: usersCreatedByManager])
+    }
+    
+    def cancel() {
+        redirect uri: '/'
+    }
 }

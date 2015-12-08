@@ -5,3 +5,7 @@ tr.clickable-row {
 td.clickable-cell {
 	cursor: pointer;
 }
+
+th.clickable-cell {
+        cursor: pointer;
+}

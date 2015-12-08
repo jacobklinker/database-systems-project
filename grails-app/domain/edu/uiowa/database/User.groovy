@@ -12,6 +12,7 @@ class User implements Serializable {
 	String lastName
 	String email
 	int reservationLimit = 10
+        int currentReservationNum
 	Date birthday
 	User manager
 	Gender gender
@@ -74,7 +75,7 @@ class User implements Serializable {
 		password blank: false
 		firstName blank: false
 		lastName blank: false
-		email nullable: true
+		email email: true, nullable: true
 		reservationLimit nullable: true
 		birthday nullable: true
 		manager nullable: true
