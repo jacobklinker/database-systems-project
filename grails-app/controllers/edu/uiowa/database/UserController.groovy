@@ -3,7 +3,7 @@ package edu.uiowa.database
 import grails.plugin.springsecurity.annotation.Secured
 
 class UserController {
-
+    def mailService
     def springSecurityService
     def passwordEncoder
     def static order = 'asc'
@@ -120,7 +120,7 @@ class UserController {
             }
             if(params.email != null) {
                 if(user.email != params.email) {
-                    user.email = email
+                    user.email = params.email
                     mailService.sendMail {
                                 to user.email
                                 subject "Your change is successful!"
